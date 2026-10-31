@@ -88,35 +88,42 @@ export default async function NewsArticlePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <nav className="mb-8" aria-label="Breadcrumb">
-          <Link
-            href={`/${lang}/news/`}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#0E52C3] hover:underline"
-          >
-            <span aria-hidden="true">←</span>
-            <span>{c.news.backToList}</span>
-          </Link>
-        </nav>
-
-        <article className="space-y-6">
-          <header className="space-y-3 border-b border-slate-200 pb-6">
-            <time
-              dateTime={post.date}
-              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+      <div className="bg-[#FAFBFD] py-12 sm:py-16">
+        <div className="mx-auto max-w-3xl px-6 sm:px-8">
+          <nav className="mb-8" aria-label="Breadcrumb">
+            <Link
+              href={`/${lang}/news/`}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#05308A] hover:text-[#0E52C3] transition-colors"
             >
-              {formatNewsDate(post.date, lang as Lang)}
-            </time>
-            <h1 className="text-3xl font-bold tracking-tight text-[#0B1B3A] sm:text-4xl">
-              {post.title}
-            </h1>
-          </header>
+              <span aria-hidden="true">←</span>
+              <span>{c.news.backToList}</span>
+            </Link>
+          </nav>
 
-          <div
-            className="prose prose-slate max-w-none text-base leading-relaxed text-[#1F2937]"
-            dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-          />
-        </article>
+          <article className="rounded-2xl border border-slate-200/90 bg-white p-8 sm:p-12 shadow-xs space-y-8">
+            <header className="space-y-4 border-b border-slate-100 pb-8">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-0.5 text-xs font-semibold text-[#05308A]">
+                  {lang === 'bn' ? 'অফিসিয়াল বার্তা' : 'Announcement'}
+                </span>
+                <time
+                  dateTime={post.date}
+                  className="text-xs font-medium uppercase tracking-wider text-slate-500"
+                >
+                  {formatNewsDate(post.date, lang as Lang)}
+                </time>
+              </div>
+              <h1 className="text-3xl font-extrabold tracking-tight text-[#0B1B3A] sm:text-4xl leading-tight">
+                {post.title}
+              </h1>
+            </header>
+
+            <div
+              className="prose prose-slate max-w-none text-[17px] leading-relaxed text-[#1F2937]"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+            />
+          </article>
+        </div>
       </div>
     </>
   );

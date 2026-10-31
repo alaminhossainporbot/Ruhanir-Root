@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Lang } from '@/lib/i18n';
-import { checkEquivalentPostExists } from '@/lib/news';
 
 interface LanguageSwitchProps {
   currentLang: Lang;
@@ -17,11 +16,8 @@ export function LanguageSwitch({ currentLang }: LanguageSwitchProps) {
     const segments = pathname.split('/').filter(Boolean);
     if (segments.length === 0) return `/${targetLang}/`;
 
-    // Special check for news slug pages: /lang/news/[slug]
     if (segments.length >= 3 && segments[1] === 'news') {
       const slug = segments[2];
-      // If the target language doesn't have this post, fallback to news index /targetLang/news/
-      // In client component, we route to news index or equivalent
       return `/${targetLang}/news/${slug}/`;
     }
 
@@ -33,44 +29,41 @@ export function LanguageSwitch({ currentLang }: LanguageSwitchProps) {
     try {
       localStorage.setItem('preferred_lang', lang);
     } catch {
-      // Ignore if localStorage is disabled
+      // Ignore
     }
   };
 
   return (
     <div
-      className="inline-flex items-center text-sm font-medium tracking-tight text-slate-600"
+      className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50/80 p-0.5 text-xs font-semibold shadow-xs"
       role="navigation"
       aria-label="Language selector"
     >
       <Link
         href={getTargetUrl('bn')}
         onClick={() => handleLangClick('bn')}
-        className={`px-2.5 py-1 transition-colors duration-150 rounded ${
+        className={`rounded-full px-3 py-1 transition-all duration-150 ${
           currentLang === 'bn'
-            ? 'text-slate-950 font-semibold bg-slate-100'
-            : 'hover:text-slate-900 text-slate-500'
+            ? 'bg-white text-[#0B1B3A] shadow-xs font-bold'
+            : 'text-slate-500 hover:text-slate-900'
         }`}
         hrefLang="bn"
         aria-current={currentLang === 'bn' ? 'true' : undefined}
       >
         বাংলা
       </Link>
-      <span className="text-slate-300 select-none" aria-hidden="true">
-        |
-      </span>
       <Link
         href={getTargetUrl('en')}
         onClick={() => handleLangClick('en')}
-        className={`px-2.5 py-1 transition-colors duration-150 rounded ${
+        className={`rounded-full px-3 py-1 transition-all duration-150 ${
           currentLang === 'en'
-            ? 'text-slate-950 font-semibold bg-slate-100'
-            : 'hover:text-slate-900 text-slate-500'
+            ? 'bg-white text-[#0B1B3A] shadow-xs font-bold'
+            : 'text-slate-500 hover:text-slate-900'
         }`}
         hrefLang="en"
         aria-current={currentLang === 'en' ? 'true' : undefined}
       >
-        English
+        EN
       </Link>
     </div>
   );
