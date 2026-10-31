@@ -1,0 +1,5 @@
+Contact: mailto:support@ruhanir.com
+Expires: 2027-10-29T10:00:00.000Z
+Preferred-Languages: en, bn
+Canonical: https://ruhanir.com/.well-known/security.txt
+Policy: https://ruhanir.com/en/security/
