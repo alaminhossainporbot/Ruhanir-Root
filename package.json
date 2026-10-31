@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "deploy": "wrangler deploy",
     "prepare-assets": "node scripts/prepare-assets.mjs"
   },
   "keywords": [],
