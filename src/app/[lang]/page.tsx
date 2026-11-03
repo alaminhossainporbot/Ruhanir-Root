@@ -14,48 +14,48 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <div>
-      {/* 1. Hero Section: 7/5 column split, logo fits inside, height ~620px on desktop */}
-      <section className="bg-white py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
-          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:min-h-[500px]">
-            {/* Left column (7 cols): H1, subline, 2 buttons */}
-            <div className="space-y-6 lg:col-span-7">
-              <h1 className="text-4xl font-bold tracking-tight text-[#0B1B3A] sm:text-5xl lg:text-[clamp(2.5rem,5vw,3.75rem)] leading-[1.15]">
+      {/* 1. Hero Section: text first, logo mark second on mobile; 7/5 split on desktop */}
+      <section className="bg-white py-16 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:min-h-[500px]">
+            {/* Text column (7 cols on desktop): H1, subline, buttons */}
+            <div className="order-1 lg:order-1 lg:col-span-7 space-y-6">
+              <h1 className="text-[clamp(2rem,6.5vw,3.75rem)] font-bold tracking-tight text-[#0B1B3A] leading-[1.22] break-words">
                 {c.home.heading}
               </h1>
-              <p className="text-[17px] text-[#374151] sm:text-[18px] leading-relaxed max-w-[60ch]">
+              <p className="text-[17px] sm:text-[18px] text-[#374151] leading-relaxed max-w-[60ch]">
                 {c.home.subline}
               </p>
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto">
                 <a
                   href="#divisions"
-                  className="inline-flex items-center justify-center rounded-[6px] bg-[#05308A] px-6 py-3 text-[16px] font-medium text-white transition-colors duration-150 hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                  className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center rounded-md bg-[#05308A] px-6 py-3.5 text-[16px] font-medium text-white transition-colors duration-150 hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
                 >
                   {c.home.buttons.divisions}
                 </a>
                 <Link
                   href={`/${lang}/contact/`}
-                  className="inline-flex items-center justify-center rounded-[6px] border border-slate-300 bg-white px-6 py-3 text-[16px] font-medium text-[#1F2937] transition-colors duration-150 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                  className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-6 py-3.5 text-[16px] font-medium text-[#1F2937] transition-colors duration-150 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
                 >
                   {c.home.buttons.contact}
                 </Link>
               </div>
             </div>
 
-            {/* Right column (5 cols): logo mark fits completely inside container */}
-            <div className="flex justify-center lg:col-span-5 lg:justify-end">
-              <div className="relative w-64 h-72 sm:w-80 sm:h-88 lg:w-[360px] lg:h-[420px]">
-                <picture>
+            {/* Logo column (5 cols on desktop): single column centered, max-width <= 220px on phone, 260-320px on tablet */}
+            <div className="order-2 lg:order-2 lg:col-span-5 flex justify-center lg:justify-end w-full">
+              <div className="relative w-full max-w-[min(100%,220px)] min-[600px]:max-w-[280px] lg:max-w-[360px] mx-auto lg:mr-0 lg:ml-auto">
+                <picture className="w-full block">
                   <source
                     type="image/webp"
                     srcSet="/logo-800.webp 800w, /logo-1200.webp 1200w"
-                    sizes="(max-width: 640px) 256px, (max-width: 1024px) 320px, 360px"
+                    sizes="(max-width: 600px) 220px, (max-width: 1024px) 280px, 360px"
                   />
                   <img
                     src="/logo-800.png"
                     srcSet="/logo-400.png 400w, /logo-800.png 800w"
                     alt={lang === 'bn' ? 'রুহানীর ইঞ্জিন প্রতীক' : 'Ruhanir Engine Logo Mark'}
-                    className="h-full w-full object-contain object-center lg:object-right"
+                    className="w-full h-auto object-contain mx-auto"
                     loading="eager"
                   />
                 </picture>
@@ -65,11 +65,11 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Thin "At a Glance" strip below Hero */}
-      <section className="border-t border-b border-slate-200 bg-[#F8FAFC] py-4">
-        <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
-          <div className="grid grid-cols-1 divide-y divide-slate-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
-            <div className="py-2 sm:px-6 sm:first:pl-0">
+      {/* Hairline "At a Glance" strip below Hero: stacks vertically on phones */}
+      <section className="border-t border-b border-slate-200 bg-[#F8FAFC] py-5">
+        <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 divide-y divide-slate-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x sm:divide-slate-200">
+            <div className="py-3 sm:py-2 sm:px-6 sm:first:pl-0 space-y-1">
               <span className="block text-[14px] font-semibold uppercase tracking-wider text-slate-500">
                 {c.home.atAGlance.divisionsLabel}
               </span>
@@ -77,7 +77,7 @@ export default async function HomePage({ params }: PageProps) {
                 {c.home.atAGlance.divisionsValue}
               </span>
             </div>
-            <div className="py-2 sm:px-6">
+            <div className="py-3 sm:py-2 sm:px-6 space-y-1">
               <span className="block text-[14px] font-semibold uppercase tracking-wider text-slate-500">
                 {c.home.atAGlance.coverageLabel}
               </span>
@@ -85,7 +85,7 @@ export default async function HomePage({ params }: PageProps) {
                 {c.home.atAGlance.coverageValue}
               </span>
             </div>
-            <div className="py-2 sm:px-6 sm:last:pr-0">
+            <div className="py-3 sm:py-2 sm:px-6 sm:last:pr-0 space-y-1">
               <span className="block text-[14px] font-semibold uppercase tracking-wider text-slate-500">
                 {c.home.atAGlance.registrationLabel}
               </span>
@@ -99,8 +99,8 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* 2. Divisions Section on light band (#F5F7FA) */}
       <section id="divisions" className="bg-[#F5F7FA] py-16 sm:py-24">
-        <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
-          <div className="mb-12 max-w-3xl space-y-2">
+        <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
+          <div className="mb-10 sm:mb-12 max-w-3xl space-y-2">
             <h2 className="text-2xl font-bold tracking-tight text-[#0B1B3A] sm:text-3xl">
               {c.home.divisionsSection.heading}
             </h2>
@@ -110,8 +110,8 @@ export default async function HomePage({ params }: PageProps) {
           </div>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {/* IT Division Panel - equal height, link pinned to bottom */}
-            <div className="flex flex-col justify-between rounded-lg bg-white p-8 sm:p-10 border-t-4 border-[#05308A]">
+            {/* IT Division Panel */}
+            <div className="flex flex-col justify-between rounded-lg bg-white p-6 sm:p-8 lg:p-10 border-t-4 border-[#05308A] shadow-xs">
               <div className="space-y-4">
                 <div className="text-[14px] font-bold uppercase tracking-widest text-[#05308A]">
                   {c.home.divisionsSection.it.ordinal}
@@ -140,16 +140,16 @@ export default async function HomePage({ params }: PageProps) {
                   href={c.home.divisionsSection.it.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[16px] font-semibold text-[#0E52C3] hover:underline"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 text-[16px] font-semibold text-[#0E52C3] hover:underline"
                 >
                   <span>{c.home.divisionsSection.it.linkText}</span>
-                  <span className="text-[12px]" aria-hidden="true">↗</span>
+                  <span className="text-[14px]" aria-hidden="true">↗</span>
                 </a>
               </div>
             </div>
 
-            {/* Store Division Panel - equal height, link pinned to bottom */}
-            <div className="flex flex-col justify-between rounded-lg bg-white p-8 sm:p-10 border-t-4 border-[#42D1CC]">
+            {/* Store Division Panel */}
+            <div className="flex flex-col justify-between rounded-lg bg-white p-6 sm:p-8 lg:p-10 border-t-4 border-[#42D1CC] shadow-xs">
               <div className="space-y-4">
                 <div className="text-[14px] font-bold uppercase tracking-widest text-[#1499C8]">
                   {c.home.divisionsSection.store.ordinal}
@@ -178,10 +178,10 @@ export default async function HomePage({ params }: PageProps) {
                   href={c.home.divisionsSection.store.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[16px] font-semibold text-[#0E52C3] hover:underline"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 text-[16px] font-semibold text-[#0E52C3] hover:underline"
                 >
                   <span>{c.home.divisionsSection.store.linkText}</span>
-                  <span className="text-[12px]" aria-hidden="true">↗</span>
+                  <span className="text-[14px]" aria-hidden="true">↗</span>
                 </a>
               </div>
             </div>
@@ -189,18 +189,18 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 3. About Summary: sticky left column on desktop */}
+      {/* 3. About Summary */}
       <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
+        <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* Left: Heading column sticky on desktop */}
+            {/* Left: Heading column */}
             <div className="lg:col-span-5 lg:sticky lg:top-[120px] self-start">
-              <h2 className="text-3xl font-bold tracking-tight text-[#0B1B3A] sm:text-4xl">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#0B1B3A]">
                 {c.home.aboutSummary.heading}
               </h2>
             </div>
 
-            {/* Right: Paragraph + Four principles with increased spacing + outline button */}
+            {/* Right: Paragraph + Four principles */}
             <div className="space-y-8 lg:col-span-7">
               <p className="text-[17px] leading-relaxed text-[#1F2937] sm:text-[18px]">
                 {c.home.aboutSummary.paragraph}
@@ -208,7 +208,7 @@ export default async function HomePage({ params }: PageProps) {
 
               <dl className="divide-y divide-slate-200 border-t border-b border-slate-200">
                 {c.home.aboutSummary.principles.map((principle) => (
-                  <div key={principle.term} className="py-7 first:pt-5 last:pb-5">
+                  <div key={principle.term} className="py-6 sm:py-7 first:pt-4 last:pb-4">
                     <dt className="text-[17px] font-semibold text-[#0B1B3A]">
                       {principle.term}
                     </dt>
@@ -222,7 +222,7 @@ export default async function HomePage({ params }: PageProps) {
               <div className="pt-4">
                 <Link
                   href={`/${lang}/about/`}
-                  className="inline-flex items-center justify-center rounded-[6px] border border-slate-300 bg-white px-6 py-2.5 text-[16px] font-medium text-[#1F2937] transition-colors hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                  className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-6 py-3 text-[16px] font-medium text-[#1F2937] transition-colors hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
                 >
                   {c.home.aboutSummary.buttonText}
                 </Link>
@@ -234,7 +234,7 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* 4. Contact Band: Call to action with headline, supporting line and white button */}
       <section className="bg-[#05308A] py-16 sm:py-20 text-white">
-        <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
+        <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div className="space-y-2 max-w-2xl">
               <h2 className="text-2xl font-bold sm:text-3xl text-white">
@@ -246,7 +246,7 @@ export default async function HomePage({ params }: PageProps) {
             </div>
             <Link
               href={`/${lang}/contact/`}
-              className="inline-flex items-center justify-center rounded-[6px] bg-white px-7 py-3 text-[16px] font-semibold text-[#05308A] transition-colors duration-150 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#05308A] shrink-0"
+              className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center rounded-md bg-white px-7 py-3 text-[16px] font-semibold text-[#05308A] transition-colors duration-150 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#05308A] shrink-0"
             >
               {c.home.contactBand.buttonText}
             </Link>
