@@ -15,13 +15,13 @@ export function Footer({ lang }: FooterProps) {
 
   return (
     <footer className="border-t border-slate-200 bg-[#F5F7FA] text-[#374151]">
-      <div className="mx-auto max-w-[1200px] px-6 py-16 sm:px-8">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
+      <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 gap-10 min-[480px]:grid-cols-2 lg:grid-cols-5">
           {/* Column 1: Brand & One-line description */}
-          <div className="space-y-4 lg:col-span-1">
+          <div className="space-y-4 min-[480px]:col-span-2 lg:col-span-1">
             <Link
               href={`/${lang}/`}
-              className="inline-flex items-center gap-3 transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-3 min-h-[44px] transition-opacity hover:opacity-90"
               aria-label={c.meta.siteName}
             >
               <Logo className="h-8 w-auto" width={32} height={42} />
@@ -39,16 +39,16 @@ export function Footer({ lang }: FooterProps) {
             <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.divisions}
             </h3>
-            <ul className="space-y-2 text-[15px]">
+            <ul className="space-y-1 text-[15px]">
               <li>
                 <a
                   href="https://it.ruhanir.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   <span>{c.footer.itLink}</span>
-                  <span className="text-[12px] text-slate-400" aria-hidden="true">↗</span>
+                  <span className="text-[14px] text-slate-400" aria-label="External link">↗</span>
                 </a>
               </li>
               <li>
@@ -56,10 +56,10 @@ export function Footer({ lang }: FooterProps) {
                   href="https://store.ruhanir.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center gap-1.5 text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   <span>{c.footer.storeLink}</span>
-                  <span className="text-[12px] text-slate-400" aria-hidden="true">↗</span>
+                  <span className="text-[14px] text-slate-400" aria-label="External link">↗</span>
                 </a>
               </li>
             </ul>
@@ -70,11 +70,11 @@ export function Footer({ lang }: FooterProps) {
             <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.company}
             </h3>
-            <ul className="space-y-2 text-[15px]">
+            <ul className="space-y-1 text-[15px]">
               <li>
                 <Link
                   href={`/${lang}/about/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.nav.about}
                 </Link>
@@ -82,7 +82,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <Link
                   href={`/${lang}/businesses/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.nav.businesses}
                 </Link>
@@ -90,7 +90,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <Link
                   href={`/${lang}/news/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.nav.news}
                 </Link>
@@ -98,7 +98,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <Link
                   href={`/${lang}/contact/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.nav.contact}
                 </Link>
@@ -111,11 +111,11 @@ export function Footer({ lang }: FooterProps) {
             <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.contact}
             </h3>
-            <ul className="space-y-2 text-[15px]">
+            <ul className="space-y-1 text-[15px]">
               <li>
                 <a
                   href="mailto:info@ruhanir.com"
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors break-all"
                 >
                   info@ruhanir.com
                 </a>
@@ -123,7 +123,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <a
                   href="mailto:support@ruhanir.com"
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors break-all"
                 >
                   support@ruhanir.com
                 </a>
@@ -131,7 +131,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <a
                   href="tel:+8801570225573"
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   +880 1570225573
                 </a>
@@ -144,11 +144,11 @@ export function Footer({ lang }: FooterProps) {
             <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.legal}
             </h3>
-            <ul className="space-y-2 text-[15px]">
+            <ul className="space-y-1 text-[15px]">
               <li>
                 <Link
                   href={`/${lang}/privacy-policy/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.footer.legalLinks.privacy}
                 </Link>
@@ -156,7 +156,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <Link
                   href={`/${lang}/terms/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.footer.legalLinks.terms}
                 </Link>
@@ -164,7 +164,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <Link
                   href={`/${lang}/cookie-policy/`}
-                  className="text-[#374151] hover:text-[#0E52C3] transition-colors"
+                  className="min-h-[44px] inline-flex items-center text-[#374151] hover:text-[#0E52C3] transition-colors"
                 >
                   {c.footer.legalLinks.cookies}
                 </Link>
@@ -172,7 +172,7 @@ export function Footer({ lang }: FooterProps) {
               <li>
                 <Link
                   href={`/${lang}/legal/`}
-                  className="font-medium text-[#0E52C3] hover:underline"
+                  className="min-h-[44px] inline-flex items-center font-medium text-[#0E52C3] hover:underline"
                 >
                   {c.footer.legalLinks.allPolicies} →
                 </Link>
