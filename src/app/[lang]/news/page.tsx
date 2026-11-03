@@ -29,10 +29,10 @@ export default async function NewsIndexPage({ params }: PageProps) {
 
   return (
     <div className="bg-[#FAFBFD] min-h-[calc(100vh-80px-350px)] py-12 sm:py-16">
-      <div className="mx-auto max-w-[1200px] px-6 sm:px-8">
+      <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
         {/* Header Block */}
-        <header className="mb-12 border-b border-slate-200/80 pb-8 space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#05308A]">
+        <header className="mb-10 sm:mb-12 border-b border-slate-200/80 pb-8 space-y-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-[14px] font-semibold uppercase tracking-wider text-[#05308A]">
             <span>{lang === 'bn' ? 'প্রেস ও নোটিশ' : 'Press & Announcements'}</span>
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight text-[#0B1B3A] sm:text-4xl lg:text-5xl">
@@ -44,21 +44,21 @@ export default async function NewsIndexPage({ params }: PageProps) {
         </header>
 
         {posts.length === 0 ? (
-          <div className="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-xs">
-            <p className="text-base text-slate-500">{c.news.noNews}</p>
+          <div className="rounded-xl border border-slate-200 bg-white p-8 sm:p-12 text-center shadow-xs">
+            <p className="text-[16px] text-slate-500">{c.news.noNews}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <article
                 key={post.slug}
-                className="group flex flex-col justify-between rounded-xl border border-slate-200/90 bg-white p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[#0E52C3]/30 hover:shadow-md"
+                className="group flex flex-col justify-between rounded-xl border border-slate-200/90 bg-white p-6 sm:p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[#0E52C3]/30 hover:shadow-md"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <time
                       dateTime={post.date}
-                      className="text-xs font-semibold uppercase tracking-wider text-[#1499C8]"
+                      className="text-[14px] font-semibold uppercase tracking-wider text-[#1499C8]"
                     >
                       {formatNewsDate(post.date, lang as Lang)}
                     </time>
@@ -71,7 +71,7 @@ export default async function NewsIndexPage({ params }: PageProps) {
                     </Link>
                   </h2>
 
-                  <p className="text-[15px] leading-relaxed text-[#4B5563] line-clamp-3">
+                  <p className="text-[16px] leading-relaxed text-[#4B5563] line-clamp-3">
                     {post.summary}
                   </p>
                 </div>
@@ -79,7 +79,7 @@ export default async function NewsIndexPage({ params }: PageProps) {
                 <div className="pt-6 mt-4 border-t border-slate-100">
                   <Link
                     href={`/${lang}/news/${post.slug}/`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#05308A] group-hover:text-[#0E52C3] group-hover:translate-x-0.5 transition-all"
+                    className="min-h-[44px] inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#05308A] group-hover:text-[#0E52C3] group-hover:translate-x-0.5 transition-all"
                   >
                     <span>{c.news.readMore}</span>
                     <span aria-hidden="true">→</span>

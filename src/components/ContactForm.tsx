@@ -100,7 +100,7 @@ export function ContactForm({ lang }: ContactFormProps) {
   const endpointConfigured = Boolean(process.env.NEXT_PUBLIC_CONTACT_ENDPOINT);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       {/* Honeypot field - invisible to real users, catches bots */}
       <div className="sr-only" aria-hidden="true">
         <label htmlFor="website-url">Website</label>
@@ -118,7 +118,7 @@ export function ContactForm({ lang }: ContactFormProps) {
       <div>
         <label
           htmlFor="contact-name"
-          className="block text-sm font-medium text-slate-800"
+          className="block text-[15px] sm:text-[16px] font-semibold text-slate-800"
         >
           {c.nameLabel} <span className="text-[#0E52C3]">*</span>
         </label>
@@ -126,17 +126,18 @@ export function ContactForm({ lang }: ContactFormProps) {
           type="text"
           id="contact-name"
           required
+          aria-describedby={formError ? 'contact-form-error' : undefined}
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={c.namePlaceholder}
-          className="mt-1.5 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
+          className="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-3 text-[16px] text-slate-900 placeholder-slate-400 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
         />
       </div>
 
       <div>
         <label
           htmlFor="contact-channel"
-          className="block text-sm font-medium text-slate-800"
+          className="block text-[15px] sm:text-[16px] font-semibold text-slate-800"
         >
           {c.contactLabel} <span className="text-[#0E52C3]">*</span>
         </label>
@@ -144,17 +145,18 @@ export function ContactForm({ lang }: ContactFormProps) {
           type="text"
           id="contact-channel"
           required
+          aria-describedby={formError ? 'contact-form-error' : undefined}
           value={contact}
           onChange={(e) => setContact(e.target.value)}
           placeholder={c.contactPlaceholder}
-          className="mt-1.5 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
+          className="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-3 text-[16px] text-slate-900 placeholder-slate-400 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
         />
       </div>
 
       <div>
         <label
           htmlFor="contact-division"
-          className="block text-sm font-medium text-slate-800"
+          className="block text-[15px] sm:text-[16px] font-semibold text-slate-800"
         >
           {c.divisionLabel}
         </label>
@@ -162,7 +164,7 @@ export function ContactForm({ lang }: ContactFormProps) {
           id="contact-division"
           value={division}
           onChange={(e) => setDivision(e.target.value)}
-          className="mt-1.5 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
+          className="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-3 text-[16px] text-slate-900 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
         >
           <option value="">{c.divisionPlaceholder}</option>
           {c.divisionOptions.map((opt) => (
@@ -176,7 +178,7 @@ export function ContactForm({ lang }: ContactFormProps) {
       <div>
         <label
           htmlFor="contact-message"
-          className="block text-sm font-medium text-slate-800"
+          className="block text-[15px] sm:text-[16px] font-semibold text-slate-800"
         >
           {c.messageLabel} <span className="text-[#0E52C3]">*</span>
         </label>
@@ -184,33 +186,44 @@ export function ContactForm({ lang }: ContactFormProps) {
           id="contact-message"
           rows={5}
           required
+          aria-describedby={formError ? 'contact-form-error' : undefined}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={c.messagePlaceholder}
-          className="mt-1.5 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-900 placeholder-slate-400 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
+          className="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-3 text-[16px] text-slate-900 placeholder-slate-400 focus:border-[#0E52C3] focus:ring-1 focus:ring-[#0E52C3]"
         />
       </div>
 
-      <p className="text-xs text-slate-500">{c.privacy}</p>
+      <p className="text-[14px] text-slate-500">{c.privacy}</p>
 
       {!endpointConfigured && (
-        <p className="text-xs text-slate-500 italic">{c.fallbackNote}</p>
+        <p className="text-[14px] text-slate-500 italic">{c.fallbackNote}</p>
       )}
 
       {formError && (
-        <div className="rounded-md bg-amber-50 p-3 text-xs text-amber-800 border border-amber-200">
+        <div
+          id="contact-form-error"
+          role="alert"
+          className="rounded-md bg-amber-50 p-3.5 text-[15px] text-amber-800 border border-amber-200"
+        >
           {formError}
         </div>
       )}
 
       {status === 'success' && (
-        <div className="rounded-md bg-emerald-50 p-3 text-xs text-emerald-800 border border-emerald-200">
+        <div
+          role="status"
+          className="rounded-md bg-emerald-50 p-3.5 text-[15px] text-emerald-800 border border-emerald-200"
+        >
           {c.successMessage}
         </div>
       )}
 
       {status === 'error' && (
-        <div className="rounded-md bg-rose-50 p-3 text-xs text-rose-800 border border-rose-200">
+        <div
+          role="alert"
+          className="rounded-md bg-rose-50 p-3.5 text-[15px] text-rose-800 border border-rose-200"
+        >
           {c.errorMessage}
         </div>
       )}
@@ -218,7 +231,7 @@ export function ContactForm({ lang }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex items-center justify-center rounded-md bg-[#05308A] px-5 py-2.5 text-sm font-medium text-white transition-colors duration-150 hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2 disabled:opacity-50"
+        className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center rounded-md bg-[#05308A] px-6 py-3.5 text-[16px] font-medium text-white transition-colors duration-150 hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2 disabled:opacity-50"
       >
         {status === 'submitting'
           ? lang === 'bn'

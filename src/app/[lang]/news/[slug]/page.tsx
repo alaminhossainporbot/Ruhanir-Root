@@ -89,31 +89,31 @@ export default async function NewsArticlePage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <div className="bg-[#FAFBFD] py-12 sm:py-16">
-        <div className="mx-auto max-w-3xl px-6 sm:px-8">
+        <div className="mx-auto max-w-3xl px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
           <nav className="mb-8" aria-label="Breadcrumb">
             <Link
               href={`/${lang}/news/`}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#05308A] hover:text-[#0E52C3] transition-colors"
+              className="min-h-[44px] inline-flex items-center gap-2 text-[15px] font-semibold text-[#05308A] hover:text-[#0E52C3] transition-colors"
             >
               <span aria-hidden="true">←</span>
               <span>{c.news.backToList}</span>
             </Link>
           </nav>
 
-          <article className="rounded-2xl border border-slate-200/90 bg-white p-8 sm:p-12 shadow-xs space-y-8">
+          <article className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-8 md:p-12 shadow-xs space-y-8">
             <header className="space-y-4 border-b border-slate-100 pb-8">
               <div className="flex items-center gap-3">
-                <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-0.5 text-xs font-semibold text-[#05308A]">
+                <span className="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[14px] font-semibold text-[#05308A]">
                   {lang === 'bn' ? 'অফিসিয়াল বার্তা' : 'Announcement'}
                 </span>
                 <time
                   dateTime={post.date}
-                  className="text-xs font-medium uppercase tracking-wider text-slate-500"
+                  className="text-[14px] font-medium uppercase tracking-wider text-slate-500"
                 >
                   {formatNewsDate(post.date, lang as Lang)}
                 </time>
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-[#0B1B3A] sm:text-4xl leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-[#0B1B3A] leading-tight">
                 {post.title}
               </h1>
             </header>
