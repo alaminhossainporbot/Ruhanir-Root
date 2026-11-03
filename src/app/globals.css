@@ -23,7 +23,26 @@
 
 @layer base {
   *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
     border-color: var(--color-surface-border, currentColor);
+  }
+
+  /* Root media constraints: images/svg never overflow their containers */
+  img, svg, video, canvas, audio, iframe, embed, object {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Flex and grid children: prevent min-width: auto overflow */
+  div, section, article, main, header, footer, nav, aside {
+    min-width: 0;
+  }
+
+  :root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --sar: env(safe-area-inset-right, 0px);
   }
 
   html {
@@ -63,8 +82,18 @@
     color: var(--color-brand-heading);
   }
 
-  p {
+  p, li, dd {
     max-width: 70ch;
+    overflow-wrap: break-word;
+  }
+
+  code, pre, .wrap-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  /* Form controls font-size >= 16px to prevent iOS auto-zoom on focus */
+  input, select, textarea {
+    font-size: 16px !important;
   }
 
   :focus-visible {
@@ -72,8 +101,33 @@
     outline-offset: 2px;
   }
 
-  section[id] {
+  section[id], [id] {
     scroll-margin-top: 96px;
+  }
+
+  [data-scroll-container] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+}
+
+/* Strict 1100px breakpoint for header navigation */
+@media (max-width: 1099px) {
+  .desktop-nav-only {
+    display: none !important;
+  }
+  .mobile-menu-btn-only {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .desktop-nav-only {
+    display: inline-flex !important;
+  }
+  .mobile-menu-btn-only {
+    display: none !important;
   }
 }
 
