@@ -66,7 +66,10 @@ export default async function NewsIndexPage({ params }: PageProps) {
                   </div>
 
                   <h2 className="text-xl font-bold leading-snug tracking-tight text-[#0B1B3A] group-hover:text-[#0E52C3] transition-colors">
-                    <Link href={`/${lang}/news/${post.slug}/`}>
+                    <Link
+                      href={`/${lang}/news/${post.slug}/`}
+                      className="min-h-[44px] inline-flex items-center"
+                    >
                       {post.title}
                     </Link>
                   </h2>

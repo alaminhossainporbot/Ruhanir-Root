@@ -112,6 +112,7 @@ export function ContactForm({ lang }: ContactFormProps) {
           autoComplete="off"
           value={honeypot}
           onChange={(e) => setHoneypot(e.target.value)}
+          className="w-px h-px opacity-0"
         />
       </div>
 

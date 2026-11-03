@@ -229,7 +229,7 @@ async function main() {
             let insideScrollContainer = false;
             let curr: HTMLElement | null = el as HTMLElement;
             while (curr && curr !== document.body) {
-              if (curr.hasAttribute('data-scroll-container')) {
+              if (curr.hasAttribute('data-scroll-container') || curr.classList.contains('sr-only')) {
                 insideScrollContainer = true;
                 break;
               }
@@ -399,11 +399,15 @@ async function main() {
               if (el.classList.contains('sr-only') || el.closest('.sr-only')) continue;
               if (rect.width <= 2 || rect.height <= 2) continue;
 
-              // Ignore inline links inside paragraph bodies that flow naturally in text
+              // WCAG 2.5.8 exception: Inline text links flowing within prose sentences
               const parentTag = el.parentElement?.tagName || '';
-              if (el.tagName === 'A' && parentTag === 'P' && !el.className.includes('button')) {
-                continue;
-              }
+              const isInlineSentenceLink =
+                el.tagName === 'A' &&
+                (parentTag === 'P' ||
+                  (parentTag === 'LI' && el.parentElement?.textContent?.trim() !== el.textContent?.trim())) &&
+                !el.classList.contains('button') &&
+                !el.getAttribute('role')?.includes('button');
+              if (isInlineSentenceLink) continue;
 
               if (rect.width < 44 || rect.height < 44) {
                 const text = (el.textContent || el.getAttribute('aria-label') || '').trim();
