@@ -268,7 +268,7 @@ async function main() {
 
           const primaryNav = header.querySelector('nav[aria-label="Primary Navigation"]');
           const menuBtn = header.querySelector(
-            'button[aria-label*="menu" i], button[aria-label*="মেনু" i], button[aria-controls="mobile-menu"], button[aria-expanded]'
+            'button[aria-label*="menu" i], button[aria-label*="মেনু" i], button[aria-controls="mobile-navigation-drawer"], button[aria-controls="mobile-menu"], button[aria-expanded]'
           );
 
           const isPrimaryNavVisible = primaryNav
@@ -395,9 +395,13 @@ async function main() {
               const rect = el.getBoundingClientRect();
               if (rect.width <= 0 || rect.height <= 0) continue;
 
-              // Ignore links wrapped in body paragraphs
+              // Ignore sr-only or visually hidden elements
+              if (el.classList.contains('sr-only') || el.closest('.sr-only')) continue;
+              if (rect.width <= 2 || rect.height <= 2) continue;
+
+              // Ignore inline links inside paragraph bodies that flow naturally in text
               const parentTag = el.parentElement?.tagName || '';
-              if (el.tagName === 'A' && ['P', 'LI'].includes(parentTag) && !el.className.includes('button')) {
+              if (el.tagName === 'A' && parentTag === 'P' && !el.className.includes('button')) {
                 continue;
               }
 
@@ -439,7 +443,7 @@ async function main() {
       await page.setViewportSize({ width: 360, height: 800 });
       await page.goto(`${baseUrl}/${lang}/`, { waitUntil: 'domcontentloaded' });
       await page.waitForTimeout(100);
-      const menuBtn = page.locator('button[aria-label*="menu" i], button[aria-label*="মেনু" i], button[aria-controls="mobile-menu"], button[aria-expanded]').first();
+      const menuBtn = page.locator('button[aria-label*="menu" i], button[aria-label*="মেনু" i], button[aria-controls="mobile-navigation-drawer"], button[aria-controls="mobile-menu"], button[aria-expanded]').first();
       if (await menuBtn.isVisible().catch(() => false)) {
         await menuBtn.click();
         await page.waitForTimeout(150);
