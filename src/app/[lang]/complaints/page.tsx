@@ -12,10 +12,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'complaints'),
-    title: lang === 'bn' ? 'অভিযোগ ও প্রতিক্রিয়া' : 'Complaints and Feedback',
-  };
+  return getCommonMetadata(lang as Lang, 'complaints');
 }
 
 export default async function ComplaintsPage({ params }: PageProps) {
@@ -29,6 +26,7 @@ export default async function ComplaintsPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'অভিযোগ ও প্রতিক্রিয়া' : 'Complaints and Feedback'}
       lastUpdated="2026-10-29"
+      slug="complaints"
     >
       {isBn ? (
         <div className="space-y-6">

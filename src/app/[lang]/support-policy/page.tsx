@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'support-policy'),
-    title: lang === 'bn' ? 'আইটি সাপোর্ট ও মেইনটেন্যান্স নীতি' : 'IT Support Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'support-policy');
 }
 
 export default async function SupportPolicyPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function SupportPolicyPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'আইটি সাপোর্ট ও মেইনটেন্যান্স নীতি' : 'IT Support Policy'}
       lastUpdated="2026-10-29"
+      slug="support-policy"
     >
       {isBn ? (
         <div className="space-y-6">

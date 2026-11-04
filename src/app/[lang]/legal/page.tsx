@@ -12,10 +12,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'legal'),
-    title: lang === 'bn' ? 'আইনি ও নীতিমালা কেন্দ্র' : 'Legal & Policies Hub',
-  };
+  return getCommonMetadata(lang as Lang, 'legal');
 }
 
 export default async function LegalHubPage({ params }: PageProps) {

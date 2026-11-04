@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'security'),
-    title: lang === 'bn' ? 'নিরাপত্তা ও দায়িত্বশীল প্রকাশ নীতি' : 'Security and Responsible Disclosure',
-  };
+  return getCommonMetadata(lang as Lang, 'security');
 }
 
 export default async function SecurityPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function SecurityPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'নিরাপত্তা ও দায়িত্বশীল প্রকাশ নীতি' : 'Security and Responsible Disclosure'}
       lastUpdated="2026-10-29"
+      slug="security"
     >
       {isBn ? (
         <div className="space-y-6">

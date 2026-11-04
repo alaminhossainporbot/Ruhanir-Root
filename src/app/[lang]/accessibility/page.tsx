@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'accessibility'),
-    title: lang === 'bn' ? 'অ্যাক্সেসিবিলিটি বিবৃতি' : 'Accessibility Statement',
-  };
+  return getCommonMetadata(lang as Lang, 'accessibility');
 }
 
 export default async function AccessibilityPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function AccessibilityPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'অ্যাক্সেসিবিলিটি বিবৃতি' : 'Accessibility Statement'}
       lastUpdated="2026-10-29"
+      slug="accessibility"
     >
       {isBn ? (
         <div className="space-y-6">

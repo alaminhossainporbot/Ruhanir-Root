@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'delivery-shipping'),
-    title: lang === 'bn' ? 'ডেলিভারি ও শিপিং নীতি' : 'Delivery and Shipping Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'delivery-shipping');
 }
 
 export default async function DeliveryShippingPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function DeliveryShippingPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'ডেলিভারি ও শিপিং নীতি' : 'Delivery and Shipping Policy'}
       lastUpdated="2026-10-29"
+      slug="delivery-shipping"
     >
       {isBn ? (
         <div className="space-y-6">

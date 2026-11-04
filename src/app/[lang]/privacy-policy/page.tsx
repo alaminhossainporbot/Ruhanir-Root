@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'privacy-policy'),
-    title: lang === 'bn' ? 'গোপনীয়তা নীতি' : 'Privacy Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'privacy-policy');
 }
 
 export default async function PrivacyPolicyPage({ params }: PageProps) {
@@ -50,6 +47,7 @@ export default async function PrivacyPolicyPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'গোপনীয়তা নীতি' : 'Privacy Policy'}
       lastUpdated="2026-10-29"
+      slug="privacy-policy"
       toc={toc}
     >
       {isBn ? (

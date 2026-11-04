@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'payment-policy'),
-    title: lang === 'bn' ? 'পেমেন্ট নীতি' : 'Payment Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'payment-policy');
 }
 
 export default async function PaymentPolicyPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function PaymentPolicyPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'পেমেন্ট নীতি' : 'Payment Policy'}
       lastUpdated="2026-10-29"
+      slug="payment-policy"
     >
       {isBn ? (
         <div className="space-y-6">

@@ -6,26 +6,16 @@ import { Logo } from '@/components/Logo';
 
 export default function RootPage() {
   useEffect(() => {
+    // Only redirect if visitor has previously and explicitly saved a language preference
     try {
       const stored = localStorage.getItem('preferred_lang');
       if (stored === 'en') {
         window.location.replace('/en/');
-        return;
-      }
-      if (stored === 'bn') {
+      } else if (stored === 'bn') {
         window.location.replace('/bn/');
-        return;
       }
-
-      const browserLang = (navigator.language || '').toLowerCase();
-      if (browserLang.startsWith('en')) {
-        window.location.replace('/en/');
-        return;
-      }
-
-      window.location.replace('/bn/');
     } catch {
-      window.location.replace('/bn/');
+      // Storage unavailable or disabled; remain on chooser
     }
   }, []);
 
@@ -37,7 +27,7 @@ export default function RootPage() {
         </div>
         <div className="space-y-2">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-            রুহানি ইঞ্জিন / Ruhanir Engine
+            রুহানীর ইঞ্জিন / Ruhanir Engine
           </h1>
           <p className="text-sm text-slate-600">
             বাংলাদেশের ডিজিটাল অবকাঠামো ও আধুনিক বাণিজ্যের জন্য কাজ করা একটি প্রযুক্তিভিত্তিক প্রতিষ্ঠান।
@@ -55,18 +45,22 @@ export default function RootPage() {
             <Link
               href="/bn/"
               onClick={() => {
-                try { localStorage.setItem('preferred_lang', 'bn'); } catch {}
+                try {
+                  localStorage.setItem('preferred_lang', 'bn');
+                } catch {}
               }}
-              className="inline-flex items-center justify-center rounded-md bg-[#05308A] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-md bg-[#05308A] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
             >
               বাংলা (Bangla)
             </Link>
             <Link
               href="/en/"
               onClick={() => {
-                try { localStorage.setItem('preferred_lang', 'en'); } catch {}
+                try {
+                  localStorage.setItem('preferred_lang', 'en');
+                } catch {}
               }}
-              className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+              className="inline-flex min-h-[48px] items-center justify-center rounded-md border border-slate-300 bg-white px-6 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
             >
               English
             </Link>

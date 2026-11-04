@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'terms'),
-    title: lang === 'bn' ? 'ব্যবহারের শর্তাবলী' : 'Terms and Conditions',
-  };
+  return getCommonMetadata(lang as Lang, 'terms');
 }
 
 export default async function TermsPage({ params }: PageProps) {
@@ -46,6 +43,7 @@ export default async function TermsPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'ব্যবহারের শর্তাবলী' : 'Terms and Conditions'}
       lastUpdated="2026-10-29"
+      slug="terms"
       toc={toc}
     >
       {isBn ? (

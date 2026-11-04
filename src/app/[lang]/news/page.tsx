@@ -5,6 +5,7 @@ import { getContent, isValidLang, Lang } from '@/lib/i18n';
 import { getCommonMetadata } from '@/lib/metadata';
 import { getAllNews } from '@/lib/news';
 import { formatNewsDate } from '@/lib/digits';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
@@ -13,11 +14,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  const c = getContent(lang);
-  return {
-    ...getCommonMetadata(lang, 'news'),
-    title: c.news.heading,
-  };
+  return getCommonMetadata(lang, 'news');
 }
 
 export default async function NewsIndexPage({ params }: PageProps) {
@@ -26,10 +23,15 @@ export default async function NewsIndexPage({ params }: PageProps) {
 
   const c = getContent(lang);
   const posts = getAllNews(lang as Lang);
+  const breadcrumbItems = [
+    { name: c.nav.news, url: `https://ruhanir.com/${lang}/news/` },
+  ];
 
   return (
     <div className="bg-[#FAFBFD] min-h-[calc(100vh-80px-350px)] py-12 sm:py-16">
       <div className="mx-auto max-w-[1200px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
+        <Breadcrumbs lang={lang as Lang} items={breadcrumbItems} />
+
         {/* Header Block */}
         <header className="mb-10 sm:mb-12 border-b border-slate-200/80 pb-8 space-y-3">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-[14px] font-semibold uppercase tracking-wider text-[#05308A]">
@@ -58,34 +60,30 @@ export default async function NewsIndexPage({ params }: PageProps) {
                   <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                     <time
                       dateTime={post.date}
-                      className="text-[14px] font-semibold uppercase tracking-wider text-[#1499C8]"
+                      className="text-[13px] font-medium uppercase tracking-wider text-slate-500"
                     >
                       {formatNewsDate(post.date, lang as Lang)}
                     </time>
-                    <span className="inline-flex h-2 w-2 rounded-full bg-[#42D1CC]" aria-hidden="true" />
+                    <span className="text-[12px] font-semibold text-[#0E52C3] bg-blue-50/70 px-2 py-0.5 rounded">
+                      {lang === 'bn' ? 'বিজ্ঞপ্তি' : 'Notice'}
+                    </span>
                   </div>
-
-                  <h2 className="text-xl font-bold leading-snug tracking-tight text-[#0B1B3A] group-hover:text-[#0E52C3] transition-colors">
-                    <Link
-                      href={`/${lang}/news/${post.slug}/`}
-                      className="min-h-[44px] inline-flex items-center"
-                    >
-                      {post.title}
-                    </Link>
+                  <h2 className="text-xl font-bold tracking-tight text-[#0B1B3A] group-hover:text-[#0E52C3] transition-colors leading-snug">
+                    {post.title}
                   </h2>
-
-                  <p className="text-[16px] leading-relaxed text-[#4B5563] line-clamp-3">
+                  <p className="text-[15px] leading-relaxed text-[#4B5563] line-clamp-3">
                     {post.summary}
                   </p>
                 </div>
-
-                <div className="pt-6 mt-4 border-t border-slate-100">
+                <div className="pt-6">
                   <Link
                     href={`/${lang}/news/${post.slug}/`}
-                    className="min-h-[44px] inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#05308A] group-hover:text-[#0E52C3] group-hover:translate-x-0.5 transition-all"
+                    className="min-h-[44px] inline-flex items-center text-[15px] font-semibold text-[#05308A] group-hover:text-[#0E52C3] transition-colors"
                   >
                     <span>{c.news.readMore}</span>
-                    <span aria-hidden="true">→</span>
+                    <span className="ml-1.5 transition-transform group-hover:translate-x-1" aria-hidden="true">
+                      →
+                    </span>
                   </Link>
                 </div>
               </article>

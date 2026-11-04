@@ -36,9 +36,9 @@ export function Footer({ lang }: FooterProps) {
 
           {/* Column 2: Divisions */}
           <div className="space-y-3">
-            <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
+            <h2 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.divisions}
-            </h3>
+            </h2>
             <ul className="space-y-1 text-[15px]">
               <li>
                 <a
@@ -67,9 +67,9 @@ export function Footer({ lang }: FooterProps) {
 
           {/* Column 3: Company */}
           <div className="space-y-3">
-            <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
+            <h2 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.company}
-            </h3>
+            </h2>
             <ul className="space-y-1 text-[15px]">
               <li>
                 <Link
@@ -108,9 +108,9 @@ export function Footer({ lang }: FooterProps) {
 
           {/* Column 4: Contact */}
           <div className="space-y-3">
-            <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
+            <h2 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.contact}
-            </h3>
+            </h2>
             <ul className="space-y-1 text-[15px]">
               <li>
                 <a
@@ -141,9 +141,9 @@ export function Footer({ lang }: FooterProps) {
 
           {/* Column 5: Legal */}
           <div className="space-y-3">
-            <h3 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
+            <h2 className="text-[14px] font-semibold uppercase tracking-wider text-[#0B1B3A]">
               {c.footer.columns.legal}
-            </h3>
+            </h2>
             <ul className="space-y-1 text-[15px]">
               <li>
                 <Link

@@ -7,10 +7,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const isProduction = process.env.SITE_ENV === 'production';
+
 export const metadata: Metadata = {
-  title: 'Ruhanir Engine | রুহানি ইঞ্জিন',
+  title: 'Ruhanir Engine | ভাষা নির্বাচন / Choose Language',
   description:
-    "A technology-driven organization working on Bangladesh's digital infrastructure and modern commerce.",
+    'Select language to visit Ruhanir Engine: parent organization of Ruhanir IT and Ruhanir Store in Bangladesh.',
+  metadataBase: new URL('https://ruhanir.com'),
   alternates: {
     canonical: 'https://ruhanir.com/',
     languages: {
@@ -19,6 +22,33 @@ export const metadata: Metadata = {
       'x-default': 'https://ruhanir.com/',
     },
   },
+  openGraph: {
+    title: 'Ruhanir Engine | ভাষা নির্বাচন / Choose Language',
+    description:
+      'Select language to visit Ruhanir Engine: parent organization of Ruhanir IT and Ruhanir Store in Bangladesh.',
+    url: 'https://ruhanir.com/',
+    siteName: 'Ruhanir Engine',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ruhanir Engine Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ruhanir Engine | ভাষা নির্বাচন / Choose Language',
+    description:
+      'Select language to visit Ruhanir Engine: parent organization of Ruhanir IT and Ruhanir Store in Bangladesh.',
+    images: ['/og-image.png'],
+  },
+  robots: isProduction
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },

@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'service-terms'),
-    title: lang === 'bn' ? 'আইটি সেবা শর্তাবলী' : 'IT Service Terms',
-  };
+  return getCommonMetadata(lang as Lang, 'service-terms');
 }
 
 export default async function ServiceTermsPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function ServiceTermsPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'আইটি সেবা শর্তাবলী' : 'IT Service Terms'}
       lastUpdated="2026-10-29"
+      slug="service-terms"
     >
       {isBn ? (
         <div className="space-y-6">

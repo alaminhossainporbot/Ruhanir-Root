@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getContent, isValidLang } from '@/lib/i18n';
 import { getCommonMetadata } from '@/lib/metadata';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 interface PageProps {
   params: Promise<{ lang: string }>;
@@ -10,11 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  const c = getContent(lang);
-  return {
-    ...getCommonMetadata(lang, 'businesses'),
-    title: c.businesses.heading,
-  };
+  return getCommonMetadata(lang, 'businesses');
 }
 
 export default async function BusinessesPage({ params }: PageProps) {
@@ -22,9 +19,14 @@ export default async function BusinessesPage({ params }: PageProps) {
   if (!isValidLang(lang)) notFound();
 
   const c = getContent(lang);
+  const breadcrumbItems = [
+    { name: c.nav.businesses, url: `https://ruhanir.com/${lang}/businesses/` },
+  ];
 
   return (
-    <div className="mx-auto max-w-4xl px-4 min-[360px]:px-5 sm:px-6 py-16 sm:py-24 lg:px-8">
+    <div className="mx-auto max-w-4xl px-4 min-[360px]:px-5 sm:px-6 py-12 sm:py-16 lg:px-8">
+      <Breadcrumbs lang={lang} items={breadcrumbItems} />
+
       <header className="mb-12 sm:mb-16">
         <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
           {c.businesses.heading}
@@ -60,11 +62,22 @@ export default async function BusinessesPage({ params }: PageProps) {
               <a
                 href={c.businesses.it.link}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center rounded-md bg-[#05308A] px-6 py-3 text-[16px] font-medium text-white transition-colors hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                aria-label={
+                  lang === 'bn'
+                    ? 'রুহানীর আইটি: ইআরপি, কাস্টম সফটওয়্যার ও নেটওয়ার্ক সেবা দেখুন'
+                    : 'Ruhanir IT: ERP portals, custom applications and network setup'
+                }
               >
-                <span>{c.businesses.it.linkText}</span>
-                <span className="ml-1.5 text-[14px]" aria-label="External link">↗</span>
+                <span>
+                  {lang === 'bn'
+                    ? 'রুহানীর আইটি দেখুন (ইআরপি, কাস্টম অ্যাপ্লিকেশন ও নেটওয়ার্ক)'
+                    : 'Visit Ruhanir IT (ERP, Custom Software & Network Setup)'}
+                </span>
+                <span className="ml-1.5 text-[14px]" aria-label="External link">
+                  ↗
+                </span>
               </a>
             </div>
           </div>
@@ -84,11 +97,22 @@ export default async function BusinessesPage({ params }: PageProps) {
               <a
                 href={c.businesses.store.link}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center rounded-md bg-[#05308A] px-6 py-3 text-[16px] font-medium text-white transition-colors hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                aria-label={
+                  lang === 'bn'
+                    ? 'রুহানীর স্টোর: ডিজিটাল লাইসেন্স ও প্রিমিয়াম পণ্য দেখুন'
+                    : 'Ruhanir Store: Digital licenses and premium physical products'
+                }
               >
-                <span>{c.businesses.store.linkText}</span>
-                <span className="ml-1.5 text-[14px]" aria-label="External link">↗</span>
+                <span>
+                  {lang === 'bn'
+                    ? 'রুহানীর স্টোর দেখুন (ডিজিটাল লাইসেন্স ও প্রিমিয়াম পণ্য)'
+                    : 'Visit Ruhanir Store (Digital Licenses & Physical Products)'}
+                </span>
+                <span className="ml-1.5 text-[14px]" aria-label="External link">
+                  ↗
+                </span>
               </a>
             </div>
           </div>

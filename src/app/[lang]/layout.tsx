@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
 import { Lang, languages, isValidLang } from '@/lib/i18n';
-import { getCommonMetadata, getOrganizationJsonLd } from '@/lib/metadata';
+import { getCommonMetadata } from '@/lib/metadata';
 import { inter, notoBengali } from '@/lib/fonts';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -38,19 +38,11 @@ export default async function LangLayout({ children, params }: LayoutProps) {
     notFound();
   }
 
-  const jsonLd = getOrganizationJsonLd();
-
   return (
     <html
       lang={lang}
       className={`${inter.variable} ${notoBengali.variable}`}
     >
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
       <body className="flex min-h-screen flex-col bg-white text-slate-900 antialiased selection:bg-[#42D1CC]/30">
         <a
           href="#main-content"

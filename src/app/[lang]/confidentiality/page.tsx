@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'confidentiality'),
-    title: lang === 'bn' ? 'গোপনীয়তা ও ডেটা ব্যবস্থাপনা' : 'Confidentiality and Data Handling',
-  };
+  return getCommonMetadata(lang as Lang, 'confidentiality');
 }
 
 export default async function ConfidentialityPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function ConfidentialityPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'গোপনীয়তা ও ডেটা ব্যবস্থাপনা' : 'Confidentiality and Data Handling'}
       lastUpdated="2026-10-29"
+      slug="confidentiality"
     >
       {isBn ? (
         <div className="space-y-6">

@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'returns-refunds'),
-    title: lang === 'bn' ? 'রিটার্ন, রিফান্ড ও অর্ডার বাতিলকরণ নীতি' : 'Return, Refund and Cancellation Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'returns-refunds');
 }
 
 export default async function ReturnsRefundsPage({ params }: PageProps) {
@@ -40,6 +37,7 @@ export default async function ReturnsRefundsPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'রিটার্ন, রিফান্ড ও অর্ডার বাতিলকরণ নীতি' : 'Return, Refund and Cancellation Policy'}
       lastUpdated="2026-10-29"
+      slug="returns-refunds"
       toc={toc}
     >
       {isBn ? (

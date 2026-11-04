@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'cookie-policy'),
-    title: lang === 'bn' ? 'কুকি ও ব্রাউজার স্টোরেজ নীতি' : 'Cookie and Browser Storage Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'cookie-policy');
 }
 
 export default async function CookiePolicyPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function CookiePolicyPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'কুকি ও ব্রাউজার স্টোরেজ নীতি' : 'Cookie and Browser Storage Policy'}
       lastUpdated="2026-10-29"
+      slug="cookie-policy"
     >
       {isBn ? (
         <>

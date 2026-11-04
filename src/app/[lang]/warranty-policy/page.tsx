@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'warranty-policy'),
-    title: lang === 'bn' ? 'ওয়ারেন্টি নীতি' : 'Warranty Policy',
-  };
+  return getCommonMetadata(lang as Lang, 'warranty-policy');
 }
 
 export default async function WarrantyPolicyPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function WarrantyPolicyPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'ওয়ারেন্টি নীতি' : 'Warranty Policy'}
       lastUpdated="2026-10-29"
+      slug="warranty-policy"
     >
       {isBn ? (
         <div className="space-y-6">

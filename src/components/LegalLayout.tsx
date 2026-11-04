@@ -1,10 +1,13 @@
+import Link from 'next/link';
 import { Lang } from '@/lib/i18n';
 import { toBanglaDigits } from '@/lib/digits';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 interface LegalLayoutProps {
   lang: Lang;
   title: string;
   lastUpdated: string;
+  slug?: string;
   toc?: { id: string; title: string }[];
   children: React.ReactNode;
 }
@@ -13,6 +16,7 @@ export function LegalLayout({
   lang,
   title,
   lastUpdated,
+  slug = '',
   toc,
   children,
 }: LegalLayoutProps) {
@@ -21,9 +25,49 @@ export function LegalLayout({
       ? `${toBanglaDigits('29')} অক্টোবর ${toBanglaDigits('2026')}`
       : '29 October 2026';
 
+  const breadcrumbItems = [
+    {
+      name: lang === 'bn' ? 'আইনি তথ্য' : 'Legal Information',
+      url: `https://ruhanir.com/${lang}/legal/`,
+    },
+    ...(slug
+      ? [
+          {
+            name: title,
+            url: `https://ruhanir.com/${lang}/${slug}/`,
+          },
+        ]
+      : []),
+  ];
+
+  const relatedLinks = [
+    {
+      name: lang === 'bn' ? 'গোপনীয়তা নীতি' : 'Privacy Policy',
+      href: `/${lang}/privacy-policy/`,
+    },
+    {
+      name: lang === 'bn' ? 'ব্যবহারের শর্তাবলী' : 'Terms and Conditions',
+      href: `/${lang}/terms/`,
+    },
+    {
+      name: lang === 'bn' ? 'কুকি নীতিমালা' : 'Cookie Policy',
+      href: `/${lang}/cookie-policy/`,
+    },
+    {
+      name: lang === 'bn' ? 'অভিযোগ প্রতিকার' : 'Complaints Policy',
+      href: `/${lang}/complaints/`,
+    },
+    {
+      name: lang === 'bn' ? 'সব নীতিমালা দেখুন →' : 'All Policies Hub →',
+      href: `/${lang}/legal/`,
+    },
+  ];
+
   return (
     <div className="bg-[#FAFBFD] py-12 sm:py-16">
       <div className="mx-auto max-w-[1000px] px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
+        <Breadcrumbs lang={lang} items={breadcrumbItems} />
+
         <div className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-8 md:p-12 shadow-xs">
           <header className="mb-10 space-y-3 border-b border-slate-100 pb-8">
             <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1 text-[14px] font-semibold uppercase tracking-wider text-slate-700">
@@ -67,6 +111,27 @@ export function LegalLayout({
           >
             {children}
           </div>
+
+          {/* Related Policies Block */}
+          <section className="mt-12 pt-8 border-t border-slate-100">
+            <h2 className="text-[14px] font-bold uppercase tracking-wider text-slate-500 mb-4">
+              {lang === 'bn' ? 'সম্পর্কিত নীতিমালা' : 'Related Policies & Governance'}
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {relatedLinks
+                .filter((l) => !slug || !l.href.includes(`/${slug}/`))
+                .slice(0, 4)
+                .map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="min-h-[44px] inline-flex items-center rounded-lg border border-slate-200 bg-slate-50/70 px-4 py-2.5 text-[15px] font-medium text-[#05308A] hover:bg-slate-100 hover:text-[#0E52C3] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+            </div>
+          </section>
         </div>
       </div>
     </div>

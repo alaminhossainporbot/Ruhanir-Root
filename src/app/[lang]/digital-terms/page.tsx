@@ -11,10 +11,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLang(lang)) return {};
-  return {
-    ...getCommonMetadata(lang as Lang, 'digital-terms'),
-    title: lang === 'bn' ? 'ডিজিটাল লাইসেন্স ও সফটওয়্যার শর্তাবলী' : 'Digital License and Software Terms',
-  };
+  return getCommonMetadata(lang as Lang, 'digital-terms');
 }
 
 export default async function DigitalTermsPage({ params }: PageProps) {
@@ -28,6 +25,7 @@ export default async function DigitalTermsPage({ params }: PageProps) {
       lang={lang as Lang}
       title={isBn ? 'ডিজিটাল লাইসেন্স ও সফটওয়্যার শর্তাবলী' : 'Digital License and Software Terms'}
       lastUpdated="2026-10-29"
+      slug="digital-terms"
     >
       {isBn ? (
         <div className="space-y-6">

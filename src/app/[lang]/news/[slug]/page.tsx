@@ -5,6 +5,7 @@ import { getContent, isValidLang, Lang, languages } from '@/lib/i18n';
 import { getArticleJsonLd } from '@/lib/metadata';
 import { getAllNewsSlugs, getNewsPost, checkEquivalentPostExists } from '@/lib/news';
 import { formatNewsDate } from '@/lib/digits';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
@@ -45,10 +46,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   };
 
+  const isProduction = process.env.SITE_ENV === 'production';
+
   return {
-    title: `${post.title} | ${c.meta.siteName}`,
+    title: {
+      absolute: `${post.title} | ${c.meta.siteName}`,
+    },
     description: post.summary,
     alternates,
+    robots: isProduction
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
     openGraph: {
       title: post.title,
       description: post.summary,
@@ -82,6 +90,11 @@ export default async function NewsArticlePage({ params }: PageProps) {
     lang: lang as Lang,
   });
 
+  const breadcrumbItems = [
+    { name: c.nav.news, url: `https://ruhanir.com/${lang}/news/` },
+    { name: post.title, url: `https://ruhanir.com/${lang}/news/${slug}/` },
+  ];
+
   return (
     <>
       <script
@@ -90,15 +103,7 @@ export default async function NewsArticlePage({ params }: PageProps) {
       />
       <div className="bg-[#FAFBFD] py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-4 min-[360px]:px-5 sm:px-6 lg:px-8">
-          <nav className="mb-8" aria-label="Breadcrumb">
-            <Link
-              href={`/${lang}/news/`}
-              className="min-h-[44px] inline-flex items-center gap-2 text-[15px] font-semibold text-[#05308A] hover:text-[#0E52C3] transition-colors"
-            >
-              <span aria-hidden="true">←</span>
-              <span>{c.news.backToList}</span>
-            </Link>
-          </nav>
+          <Breadcrumbs lang={lang as Lang} items={breadcrumbItems} />
 
           <article className="rounded-2xl border border-slate-200/90 bg-white p-5 sm:p-8 md:p-12 shadow-xs space-y-8">
             <header className="space-y-4 border-b border-slate-100 pb-8">
@@ -122,6 +127,22 @@ export default async function NewsArticlePage({ params }: PageProps) {
               className="prose prose-slate max-w-none text-[17px] leading-relaxed text-[#1F2937]"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
+
+            {/* Related section for news posts */}
+            <div className="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-4">
+              <Link
+                href={`/${lang}/businesses/`}
+                className="text-[15px] font-semibold text-[#05308A] hover:underline"
+              >
+                {lang === 'bn' ? 'বিভাগসমূহ সম্পর্কে জানুন →' : 'Explore our Divisions →'}
+              </Link>
+              <Link
+                href={`/${lang}/contact/`}
+                className="text-[15px] font-semibold text-[#05308A] hover:underline"
+              >
+                {lang === 'bn' ? 'যোগাযোগ করুন →' : 'Contact Us →'}
+              </Link>
+            </div>
           </article>
         </div>
       </div>
