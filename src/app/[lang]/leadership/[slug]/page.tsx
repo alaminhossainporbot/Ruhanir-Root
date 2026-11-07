@@ -9,27 +9,33 @@ interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
 }
 
+const VALID_SLUGS = ['ahporbot', 'shakib-hassan', 'rabiul-kholifa'] as const;
+
 export function generateStaticParams() {
   const params: Array<{ lang: string; slug: string }> = [];
   for (const lang of languages) {
-    params.push({ lang, slug: 'ahporbot' });
+    for (const slug of VALID_SLUGS) {
+      params.push({ lang, slug });
+    }
   }
   return params;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  if (!isValidLang(lang) || slug !== 'ahporbot') return {};
+  if (!isValidLang(lang) || !VALID_SLUGS.includes(slug as any)) return {};
   return getCommonMetadata(lang, `leadership/${slug}`);
 }
 
 export default async function LeaderProfilePage({ params }: PageProps) {
   const { lang, slug } = await params;
-  if (!isValidLang(lang) || slug !== 'ahporbot') notFound();
+  if (!isValidLang(lang) || !VALID_SLUGS.includes(slug as any)) notFound();
 
   const c = getContent(lang);
-  const m = c.leadership.member;
-  const personJsonLd = getPersonJsonLd(lang as Lang);
+  const m = c.leadership.members.find((member) => member.slug === slug);
+  if (!m) notFound();
+
+  const personJsonLd = getPersonJsonLd(lang as Lang, slug);
 
   const breadcrumbItems = [
     { name: c.leadership.heading, url: `https://ruhanir.com/${lang}/leadership/` },
@@ -52,15 +58,15 @@ export default async function LeaderProfilePage({ params }: PageProps) {
               <picture>
                 <source
                   type="image/webp"
-                  srcSet="/images/leadership/ahporbot-800.webp 800w, /images/leadership/ahporbot-400.webp 400w"
+                  srcSet={`/images/leadership/${m.imagePrefix}-800.webp 800w, /images/leadership/${m.imagePrefix}-400.webp 400w`}
                   sizes="(max-width: 768px) 100vw, 360px"
                 />
                 <img
-                  src="/images/leadership/ahporbot-400.jpg"
+                  src={`/images/leadership/${m.imagePrefix}-400.jpg`}
                   alt={
                     lang === 'bn'
-                      ? 'আল আমিন হোসাইন পর্বত - ব্যবস্থাপনা পরিচালক, রুহানীর ইঞ্জিন'
-                      : 'AL Amin Hossain Porbot - Managing Director, Ruhanir Engine'
+                      ? `${m.name} - ${m.role}, রুহানীর ইঞ্জিন`
+                      : `${m.name} - ${m.role}, Ruhanir Engine`
                   }
                   width={400}
                   height={535}
@@ -89,22 +95,24 @@ export default async function LeaderProfilePage({ params }: PageProps) {
                 </span>
               </div>
 
-              <div className="border-t border-slate-200 pt-3">
-                <span className="block text-[14px] font-semibold uppercase tracking-wider text-slate-500">
-                  {lang === 'bn' ? 'পেশাগত প্রোফাইল' : 'Professional Profile'}
-                </span>
-                <div className="mt-2">
-                  <a
-                    href={m.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="min-h-[44px] inline-flex items-center gap-2 rounded-md bg-white border border-slate-300 px-4 py-2 text-[15px] font-medium text-[#05308A] transition-colors hover:border-[#0E52C3] hover:text-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
-                  >
-                    <span>{m.githubLabel}</span>
-                    <span className="text-[14px] text-slate-400" aria-label="External link">↗</span>
-                  </a>
+              {m.github && (
+                <div className="border-t border-slate-200 pt-3">
+                  <span className="block text-[14px] font-semibold uppercase tracking-wider text-slate-500">
+                    {lang === 'bn' ? 'পেশাগত প্রোফাইল' : 'Professional Profile'}
+                  </span>
+                  <div className="mt-2">
+                    <a
+                      href={m.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-h-[44px] inline-flex items-center gap-2 rounded-md bg-white border border-slate-300 px-4 py-2 text-[15px] font-medium text-[#05308A] transition-colors hover:border-[#0E52C3] hover:text-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                    >
+                      <span>{m.githubLabel}</span>
+                      <span className="text-[14px] text-slate-400" aria-label="External link">↗</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </aside>
 

@@ -1,3 +1,73 @@
+import type { LeaderMember } from './types';
+
+const leadershipMembersEn: LeaderMember[] = [
+  {
+    slug: 'ahporbot',
+    name: 'AL Amin Hossain Porbot',
+    role: 'Managing Director',
+    imagePrefix: 'ahporbot',
+    bio: 'AL Amin Hossain Porbot is the Founder and Managing Director of Ruhanir Engine. He steers the organization\u2019s executive operations, technology direction, and strategic growth across its two divisions: Ruhanir IT and Ruhanir Store. His focus is on building dependable digital infrastructure, robust enterprise systems, and fair commercial platforms in Bangladesh.',
+    github: 'https://github.com/alaminhossainporbot',
+    githubLabel: 'GitHub Profile',
+    focusAreas: [
+      {
+        title: 'Institutional Governance',
+        description: 'Overseeing organizational strategy, regulatory compliance, and operational integrity across Bangladesh.',
+      },
+      {
+        title: 'Technology & Architecture',
+        description: 'Directing engineering standards, system architecture, and technology roadmaps for enterprise deployments.',
+      },
+      {
+        title: 'Division Alignment',
+        description: 'Guiding long-term growth and commercial alignment between Ruhanir IT and Ruhanir Store.',
+      },
+    ],
+  },
+  {
+    slug: 'shakib-hassan',
+    name: 'Md Shakib Hassan',
+    role: 'Chief Executive Officer (CEO)',
+    imagePrefix: 'shakib-hassan',
+    bio: 'Md Shakib Hassan is the Chief Executive Officer (CEO) of Ruhanir Engine. He leads organizational execution, executive management, and operational growth across Ruhanir IT and Ruhanir Store. Collaborating with institutional governance, he drives enterprise solutions delivery, business scaling, and service excellence across Bangladesh.',
+    focusAreas: [
+      {
+        title: 'Executive Management & Growth',
+        description: 'Directing company-wide operations, organizational performance, and growth initiatives across all operational units.',
+      },
+      {
+        title: 'Enterprise Delivery',
+        description: 'Supervising high-standard technical delivery, client satisfaction, and operational rigor for corporate partners.',
+      },
+      {
+        title: 'Operational Scalability',
+        description: 'Scaling internal workflows, cross-functional collaboration, and strategic execution throughout Bangladesh.',
+      },
+    ],
+  },
+  {
+    slug: 'rabiul-kholifa',
+    name: 'Rabiul Islam Kholifa',
+    role: 'Sales and Compliance Officer',
+    imagePrefix: 'rabiul-kholifa',
+    bio: 'Rabiul Islam Kholifa serves as the Sales and Compliance Officer at Ruhanir Engine. He oversees commercial sales strategy, business communications, and regulatory compliance for both IT services and digital retail. He ensures that all commercial engagements, customer contracts, and enterprise sales adhere to Bangladesh\u2019s legal standards and fair trade practices.',
+    focusAreas: [
+      {
+        title: 'Commercial Sales',
+        description: 'Managing corporate sales pipelines, contract executions, and structured commercial offerings for IT and retail divisions.',
+      },
+      {
+        title: 'Regulatory Compliance',
+        description: 'Ensuring full adherence to trade licensing regulations, consumer protection policies, and statutory trade frameworks in Bangladesh.',
+      },
+      {
+        title: 'Fair Trade & Transparency',
+        description: 'Safeguarding commercial transparency, pricing ethics, and institutional trust in every business transaction.',
+      },
+    ],
+  },
+];
+
 export const en = {
   meta: {
     siteName: 'Ruhanir Engine',
@@ -132,28 +202,8 @@ export const en = {
     viewProfile: 'View executive profile',
     profileHeading: 'Executive Profile',
     focusAreasHeading: 'Key Focus Areas',
-    member: {
-      slug: 'ahporbot',
-      name: 'AL Amin Hossain Porbot',
-      role: 'Managing Director',
-      bio: 'AL Amin Hossain Porbot is the Founder and Managing Director of Ruhanir Engine. He steers the organization\u2019s executive operations, technology direction, and strategic growth across its two divisions: Ruhanir IT and Ruhanir Store. His focus is on building dependable digital infrastructure, robust enterprise systems, and fair commercial platforms in Bangladesh.',
-      github: 'https://github.com/alaminhossainporbot',
-      githubLabel: 'GitHub Profile',
-      focusAreas: [
-        {
-          title: 'Institutional Governance',
-          description: 'Overseeing organizational strategy, regulatory compliance, and operational integrity across Bangladesh.',
-        },
-        {
-          title: 'Technology & Architecture',
-          description: 'Directing engineering standards, system architecture, and technology roadmaps for enterprise deployments.',
-        },
-        {
-          title: 'Division Alignment',
-          description: 'Guiding long-term growth and commercial alignment between Ruhanir IT and Ruhanir Store.',
-        },
-      ],
-    },
+    members: leadershipMembersEn,
+    member: leadershipMembersEn[0],
   },
 
   businesses: {

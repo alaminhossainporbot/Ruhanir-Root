@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'about',
     'leadership',
     'leadership/ahporbot',
+    'leadership/shakib-hassan',
+    'leadership/rabiul-kholifa',
     'businesses',
     'news',
     'contact',
@@ -53,8 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const isPolicy =
         route !== '' &&
         route !== 'about' &&
-        route !== 'leadership' &&
-        route !== 'leadership/ahporbot' &&
+        !route.startsWith('leadership') &&
         route !== 'businesses' &&
         route !== 'news' &&
         route !== 'contact';

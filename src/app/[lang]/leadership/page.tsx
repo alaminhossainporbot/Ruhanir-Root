@@ -29,7 +29,7 @@ export default async function LeadershipHubPage({ params }: PageProps) {
     { name: c.leadership.heading, url: `https://ruhanir.com/${lang}/leadership/` },
   ];
 
-  const m = c.leadership.member;
+  const members = c.leadership.members;
 
   return (
     <>
@@ -49,72 +49,79 @@ export default async function LeadershipHubPage({ params }: PageProps) {
           </p>
         </header>
 
-        {/* Executive Leader Card */}
-        <section className="mt-12 sm:mt-16">
-          <article className="rounded-xl border border-slate-200/90 bg-white p-6 sm:p-8 md:p-10 shadow-xs">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-              {/* Leader Photo */}
-              <div className="md:col-span-4 flex justify-center md:justify-start">
-                <div className="relative w-full max-w-[240px] md:max-w-none overflow-hidden rounded-lg border border-slate-200 bg-slate-100 shadow-xs">
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet="/images/leadership/ahporbot-400.webp 400w, /images/leadership/ahporbot-800.webp 800w"
-                      sizes="(max-width: 768px) 240px, 280px"
-                    />
-                    <img
-                      src="/images/leadership/ahporbot-400.jpg"
-                      alt={
-                        lang === 'bn'
-                          ? 'আল আমিন হোসাইন পর্বত - ব্যবস্থাপনা পরিচালক, রুহানীর ইঞ্জিন'
-                          : 'AL Amin Hossain Porbot - Managing Director, Ruhanir Engine'
-                      }
-                      width={400}
-                      height={535}
-                      loading="eager"
-                      className="h-auto w-full object-cover aspect-[3/4]"
-                    />
-                  </picture>
-                </div>
-              </div>
-
-              {/* Leader Bio & Details */}
-              <div className="md:col-span-8 space-y-5">
-                <div className="space-y-1.5">
-                  <div className="inline-flex items-center rounded-md bg-[#05308A]/10 px-2.5 py-1 text-sm font-semibold text-[#05308A]">
-                    {m.role}
+        {/* Executive Leader Cards */}
+        <section className="mt-12 sm:mt-16 space-y-8 sm:space-y-10">
+          {members.map((m, index) => (
+            <article
+              key={m.slug}
+              className="rounded-xl border border-slate-200/90 bg-white p-6 sm:p-8 md:p-10 shadow-xs"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                {/* Leader Photo */}
+                <div className="md:col-span-4 flex justify-center md:justify-start">
+                  <div className="relative w-full max-w-[240px] md:max-w-none overflow-hidden rounded-lg border border-slate-200 bg-slate-100 shadow-xs">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcSet={`/images/leadership/${m.imagePrefix}-400.webp 400w, /images/leadership/${m.imagePrefix}-800.webp 800w`}
+                        sizes="(max-width: 768px) 240px, 280px"
+                      />
+                      <img
+                        src={`/images/leadership/${m.imagePrefix}-400.jpg`}
+                        alt={
+                          lang === 'bn'
+                            ? `${m.name} - ${m.role}, রুহানীর ইঞ্জিন`
+                            : `${m.name} - ${m.role}, Ruhanir Engine`
+                        }
+                        width={400}
+                        height={535}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        className="h-auto w-full object-cover aspect-[3/4]"
+                      />
+                    </picture>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1B3A]">
-                    {m.name}
-                  </h2>
                 </div>
 
-                <p className="text-[16px] sm:text-[17px] leading-relaxed text-[#374151]">
-                  {m.bio}
-                </p>
+                {/* Leader Bio & Details */}
+                <div className="md:col-span-8 space-y-5">
+                  <div className="space-y-1.5">
+                    <div className="inline-flex items-center rounded-md bg-[#05308A]/10 px-2.5 py-1 text-sm font-semibold text-[#05308A]">
+                      {m.role}
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0B1B3A]">
+                      {m.name}
+                    </h2>
+                  </div>
 
-                <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
-                  <Link
-                    href={`/${lang}/leadership/${m.slug}/`}
-                    className="min-h-[44px] inline-flex items-center justify-center rounded-md bg-[#05308A] px-6 py-2.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
-                  >
-                    <span>{c.leadership.viewProfile}</span>
-                    <span className="ml-1.5" aria-hidden="true">→</span>
-                  </Link>
+                  <p className="text-[16px] sm:text-[17px] leading-relaxed text-[#374151]">
+                    {m.bio}
+                  </p>
 
-                  <a
-                    href={m.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-[15px] font-medium text-[#1F2937] transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
-                  >
-                    <span>{m.githubLabel}</span>
-                    <span className="text-[14px] text-slate-400" aria-label="External link">↗</span>
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
+                    <Link
+                      href={`/${lang}/leadership/${m.slug}/`}
+                      className="min-h-[44px] inline-flex items-center justify-center rounded-md bg-[#05308A] px-6 py-2.5 text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-[#0E52C3] focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                    >
+                      <span>{c.leadership.viewProfile}</span>
+                      <span className="ml-1.5" aria-hidden="true">→</span>
+                    </Link>
+
+                    {m.github && (
+                      <a
+                        href={m.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="min-h-[44px] min-w-[44px] inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 py-2.5 text-[15px] font-medium text-[#1F2937] transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#0E52C3] focus:ring-offset-2"
+                      >
+                        <span>{m.githubLabel}</span>
+                        <span className="text-[14px] text-slate-400" aria-label="External link">↗</span>
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+          ))}
         </section>
 
         {/* Cross navigation back to About */}

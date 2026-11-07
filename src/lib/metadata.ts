@@ -55,6 +55,30 @@ export const ROUTE_METADATA: Record<string, Record<Lang, RouteMeta>> = {
         'রুহানীর ইঞ্জিন-এর প্রতিষ্ঠাতা ও ব্যবস্থাপনা পরিচালক আল আমিন হোসাইন পর্বত-এর প্রাতিষ্ঠানিক পরিচিতি ও দায়িত্ব।',
     },
   },
+  'leadership/shakib-hassan': {
+    en: {
+      title: 'Md Shakib Hassan | Ruhanir Engine',
+      description:
+        'Executive profile of Md Shakib Hassan, Chief Executive Officer (CEO) of Ruhanir Engine.',
+    },
+    bn: {
+      title: 'মো. সাকিব হাসান | রুহানীর ইঞ্জিন',
+      description:
+        'রুহানীর ইঞ্জিন-এর প্রধান নির্বাহী কর্মকর্তা (সিইও) মো. সাকিব হাসান-এর প্রাতিষ্ঠানিক পরিচিতি ও দায়িত্ব।',
+    },
+  },
+  'leadership/rabiul-kholifa': {
+    en: {
+      title: 'Rabiul Islam Kholifa | Ruhanir Engine',
+      description:
+        'Executive profile of Rabiul Islam Kholifa, Sales and Compliance Officer at Ruhanir Engine.',
+    },
+    bn: {
+      title: 'রবিউল ইসলাম খলিফা | রুহানীর ইঞ্জিন',
+      description:
+        'রুহানীর ইঞ্জিন-এর বিক্রয় ও কমপ্লায়েন্স কর্মকর্তা রবিউল ইসলাম খলিফা-এর প্রাতিষ্ঠানিক পরিচিতি ও দায়িত্ব।',
+    },
+  },
   businesses: {
     en: {
       title: 'Divisions | Ruhanir IT & Ruhanir Store',
@@ -470,7 +494,43 @@ export function getArticleJsonLd(post: {
   };
 }
 
-export function getPersonJsonLd(lang: Lang) {
+export function getPersonJsonLd(lang: Lang, slug: string = 'ahporbot') {
+  if (slug === 'shakib-hassan') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: lang === 'bn' ? 'মো. সাকিব হাসান' : 'Md Shakib Hassan',
+      alternateName: lang === 'bn' ? 'Md Shakib Hassan' : 'মো. সাকিব হাসান',
+      jobTitle: lang === 'bn' ? 'প্রধান নির্বাহী কর্মকর্তা (সিইও)' : 'Chief Executive Officer (CEO)',
+      worksFor: {
+        '@type': 'Organization',
+        name: lang === 'bn' ? 'রুহানীর ইঞ্জিন' : 'Ruhanir Engine',
+        url: 'https://ruhanir.com',
+      },
+      url: `https://ruhanir.com/${lang}/leadership/shakib-hassan/`,
+      image: 'https://ruhanir.com/images/leadership/shakib-hassan-800.webp',
+      sameAs: [],
+    };
+  }
+
+  if (slug === 'rabiul-kholifa') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: lang === 'bn' ? 'রবিউল ইসলাম খলিফা' : 'Rabiul Islam Kholifa',
+      alternateName: lang === 'bn' ? 'Rabiul Islam Kholifa' : 'রবিউল ইসলাম খলিফা',
+      jobTitle: lang === 'bn' ? 'বিক্রয় ও কমপ্লায়েন্স কর্মকর্তা' : 'Sales and Compliance Officer',
+      worksFor: {
+        '@type': 'Organization',
+        name: lang === 'bn' ? 'রুহানীর ইঞ্জিন' : 'Ruhanir Engine',
+        url: 'https://ruhanir.com',
+      },
+      url: `https://ruhanir.com/${lang}/leadership/rabiul-kholifa/`,
+      image: 'https://ruhanir.com/images/leadership/rabiul-kholifa-800.webp',
+      sameAs: [],
+    };
+  }
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
