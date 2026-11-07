@@ -1,14 +1,14 @@
 {
   "en": {
-    "performance": 79,
+    "performance": 74,
     "accessibility": 96,
-    "bestPractices": 96,
+    "bestPractices": 79,
     "seo": 100
   },
   "bn": {
-    "performance": 75,
+    "performance": 74,
     "accessibility": 96,
-    "bestPractices": 96,
+    "bestPractices": 79,
     "seo": 100
   }
 }

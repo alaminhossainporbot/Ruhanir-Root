@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
     'about',
+    'leadership',
+    'leadership/ahporbot',
     'businesses',
     'news',
     'contact',
@@ -51,13 +53,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const isPolicy =
         route !== '' &&
         route !== 'about' &&
+        route !== 'leadership' &&
+        route !== 'leadership/ahporbot' &&
         route !== 'businesses' &&
         route !== 'news' &&
         route !== 'contact';
 
       const lastModified = isPolicy
         ? new Date('2026-10-29')
-        : new Date('2026-10-31');
+        : new Date('2026-11-07');
 
       entries.push({
         url: `${baseUrl}/${lang}/${path}`,

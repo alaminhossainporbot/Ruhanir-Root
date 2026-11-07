@@ -72,10 +72,12 @@ This repository (`Ruhanir-Root`) is the corporate root website (**`ruhanir.com`*
 
 ## 5. Current Implementation State
 
-- **Pages Built & Verified (45 routes total)**:
+- **Pages Built & Verified (49 routes total)**:
   - Language chooser (`/`)
   - Home (`/en/`, `/bn/`)
   - About (`/en/about/`, `/bn/about/`)
+  - Leadership (`/en/leadership/`, `/bn/leadership/`)
+  - Executive Profile: AL Amin Hossain Porbot (`/en/leadership/ahporbot/`, `/bn/leadership/ahporbot/`)
   - Businesses (`/en/businesses/`, `/bn/businesses/`)
   - News (`/en/news/`, `/bn/news/`) + 1 launch post (`/en/news/website-launch/`, `/bn/news/website-launch/`) + RSS feeds (`/en/rss.xml`, `/bn/rss.xml`)
   - Contact (`/en/contact/`, `/bn/contact/`) with honeypot and 3s minimum-time check

@@ -116,6 +116,44 @@ export const en = {
           "We operate within Bangladesh's legal and regulatory framework.",
       },
     ],
+    leadershipSection: {
+      heading: 'Leadership & Governance',
+      description:
+        'The executive direction guiding Ruhanir Engine\u2019s technology standards, commercial platforms, and institutional development across Bangladesh.',
+      buttonText: 'View Leadership Profile',
+    },
+  },
+
+  leadership: {
+    heading: 'Leadership',
+    subline: 'Executive direction and governance for Ruhanir Engine.',
+    backToList: 'Back to Leadership',
+    aboutLink: 'About Ruhanir Engine',
+    viewProfile: 'View executive profile',
+    profileHeading: 'Executive Profile',
+    focusAreasHeading: 'Key Focus Areas',
+    member: {
+      slug: 'ahporbot',
+      name: 'AL Amin Hossain Porbot',
+      role: 'Managing Director',
+      bio: 'AL Amin Hossain Porbot is the Founder and Managing Director of Ruhanir Engine. He steers the organization\u2019s executive operations, technology direction, and strategic growth across its two divisions: Ruhanir IT and Ruhanir Store. His focus is on building dependable digital infrastructure, robust enterprise systems, and fair commercial platforms in Bangladesh.',
+      github: 'https://github.com/alaminhossainporbot',
+      githubLabel: 'GitHub Profile',
+      focusAreas: [
+        {
+          title: 'Institutional Governance',
+          description: 'Overseeing organizational strategy, regulatory compliance, and operational integrity across Bangladesh.',
+        },
+        {
+          title: 'Technology & Architecture',
+          description: 'Directing engineering standards, system architecture, and technology roadmaps for enterprise deployments.',
+        },
+        {
+          title: 'Division Alignment',
+          description: 'Guiding long-term growth and commercial alignment between Ruhanir IT and Ruhanir Store.',
+        },
+      ],
+    },
   },
 
   businesses: {

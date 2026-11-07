@@ -12,6 +12,10 @@ const ROUTES = [
   // Primary pages
   '/en/about/',
   '/bn/about/',
+  '/en/leadership/',
+  '/bn/leadership/',
+  '/en/leadership/ahporbot/',
+  '/bn/leadership/ahporbot/',
   '/en/businesses/',
   '/bn/businesses/',
   '/en/contact/',

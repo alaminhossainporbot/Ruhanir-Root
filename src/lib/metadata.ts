@@ -31,6 +31,30 @@ export const ROUTE_METADATA: Record<string, Record<Lang, RouteMeta>> = {
         'রুহানীর ইঞ্জিনের প্রাতিষ্ঠানিক পরিচিতি, মূলনীতি, পরিচালনা দর্শন এবং আইটি ও স্টোর বিভাগের কার্যক্রম জানুন।',
     },
   },
+  leadership: {
+    en: {
+      title: 'Leadership | Ruhanir Engine',
+      description:
+        'Meet the executive leadership and governance directing Ruhanir Engine and its operational divisions in Bangladesh.',
+    },
+    bn: {
+      title: 'নেতৃত্ব ও পরিচালনা | রুহানীর ইঞ্জিন',
+      description:
+        'রুহানীর ইঞ্জিন এবং এর বিভাগসমূহের কৌশলগত ও প্রযুক্তিগত দিকনির্দেশনা প্রদানকারী নির্বাহী নেতৃত্ব।',
+    },
+  },
+  'leadership/ahporbot': {
+    en: {
+      title: 'AL Amin Hossain Porbot | Ruhanir Engine',
+      description:
+        'Executive profile of AL Amin Hossain Porbot, Founder & Managing Director of Ruhanir Engine.',
+    },
+    bn: {
+      title: 'আল আমিন হোসাইন পর্বত | রুহানীর ইঞ্জিন',
+      description:
+        'রুহানীর ইঞ্জিন-এর প্রতিষ্ঠাতা ও ব্যবস্থাপনা পরিচালক আল আমিন হোসাইন পর্বত-এর প্রাতিষ্ঠানিক পরিচিতি ও দায়িত্ব।',
+    },
+  },
   businesses: {
     en: {
       title: 'Divisions | Ruhanir IT & Ruhanir Store',
@@ -340,6 +364,14 @@ export function getOrganizationJsonLd() {
       '@type': 'Country',
       name: 'Bangladesh',
     },
+    founder: {
+      '@type': 'Person',
+      name: 'AL Amin Hossain Porbot',
+      alternateName: 'আল আমিন হোসাইন পর্বত',
+      jobTitle: 'Managing Director',
+      url: 'https://ruhanir.com/en/leadership/ahporbot/',
+      sameAs: ['https://github.com/alaminhossainporbot'],
+    },
     sameAs: [],
     subOrganization: [
       {
@@ -435,5 +467,23 @@ export function getArticleJsonLd(post: {
       },
     },
     image: ['https://ruhanir.com/og-image.png'],
+  };
+}
+
+export function getPersonJsonLd(lang: Lang) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: lang === 'bn' ? 'আল আমিন হোসাইন পর্বত' : 'AL Amin Hossain Porbot',
+    alternateName: lang === 'bn' ? 'AL Amin Hossain Porbot' : 'আল আমিন হোসাইন পর্বত',
+    jobTitle: lang === 'bn' ? 'ব্যবস্থাপনা পরিচালক' : 'Managing Director',
+    worksFor: {
+      '@type': 'Organization',
+      name: lang === 'bn' ? 'রুহানীর ইঞ্জিন' : 'Ruhanir Engine',
+      url: 'https://ruhanir.com',
+    },
+    url: `https://ruhanir.com/${lang}/leadership/ahporbot/`,
+    image: 'https://ruhanir.com/images/leadership/ahporbot-800.webp',
+    sameAs: ['https://github.com/alaminhossainporbot'],
   };
 }
